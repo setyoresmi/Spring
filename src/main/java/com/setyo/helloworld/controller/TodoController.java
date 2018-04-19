@@ -3,7 +3,6 @@ package com.setyo.helloworld.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,9 +23,10 @@ public class TodoController {
 		return todoService.getAllTodo();
 	}
 
-	@PostMapping(path="/users/{name}/todo",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-	public ResponseEntity<?> add(@PathVariable String name, @RequestBody Todo todo){
-		Todo createdTodo = todoService.addTodo(todo.getUser(), todo.getDesc(), todo.getTargetDate(), todo.isDone());
+	@PostMapping(path="/users/{name}/todo")
+	public ResponseEntity<?> add(@PathVariable String name, Todo todo){
+		Todo createdTodo = todoService.addTodo(todo.getUser(),
+				todo.getDesc(),todo.getTargetDate(), todo.isDone());
 		if(createdTodo == null) {
 			return ResponseEntity.noContent().build();
 		}

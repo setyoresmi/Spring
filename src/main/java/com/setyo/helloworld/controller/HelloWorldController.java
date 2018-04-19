@@ -1,9 +1,13 @@
 package com.setyo.helloworld.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.setyo.helloworld.model.HelloWorldBean;
@@ -38,6 +42,12 @@ public class HelloWorldController {
 	@RequestMapping(value="/hello/post",method=RequestMethod.POST)
 	public String postHelloWorld() {
 		return "Post some hello";
+	}
+	
+	/*posting string using postmapping*/
+	@PostMapping("/post")
+	public @ResponseBody ResponseEntity<String> post(){
+		return new ResponseEntity<String>("Post Response",HttpStatus.OK);
 	}
 	
 }
